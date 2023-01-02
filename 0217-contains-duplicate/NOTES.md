@@ -1,1 +1,1 @@
-​
+compare nums list with set(nums)
