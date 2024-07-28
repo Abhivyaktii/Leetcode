@@ -18,20 +18,21 @@ var detectCycle = function(head) {
     let fast = head;
     let slow = head;
     
-    // Step 1: Determine if there is a cycle
+    // Step 1: Detect if there is a cycle
     while (fast && fast.next) {
         fast = fast.next.next;
         slow = slow.next;
         
         if (fast === slow) {
             // Cycle detected
-            let entry = head;
+            let pointer = head;
+            
             // Step 2: Find the entry point of the cycle
-            while (entry !== slow) {
-                entry = entry.next;
+            while (pointer !== slow) {
+                pointer = pointer.next;
                 slow = slow.next;
             }
-            return entry;
+            return slow;
         }
     }
     
