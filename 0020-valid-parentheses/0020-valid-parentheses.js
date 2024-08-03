@@ -7,26 +7,29 @@ var isValid = function(s) {
     if (length === 0) {
         return true;
     }
+
     if (length === 1) {
         return false;
     }
     
-    const stack = [];
-    const parMap = {
-        ')': '(',
+    const parenthesesMap = {
+        '}': '{',
         ']': '[',
-        '}': '{'
+        ')': '('
     };
-
+    
+    const storeParentheses = [];
+    
     for (let i = 0; i < length; i++) {
-        if (parMap[s[i]]) {
-            if (stack.pop() !== parMap[s[i]]) {
+        if (parenthesesMap[s[i]]) {
+            const lastParentheses = storeParentheses.pop();
+            if (lastParentheses !== parenthesesMap[s[i]]) {
                 return false;
             }
         } else {
-            stack.push(s[i]);
+            storeParentheses.push(s[i]);
         }
     }
-
-    return stack.length === 0;
+    
+    return storeParentheses.length === 0;
 };
