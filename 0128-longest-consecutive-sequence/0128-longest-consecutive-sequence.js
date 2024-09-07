@@ -3,38 +3,28 @@
  * @return {number}
  */
 var longestConsecutive = function(nums) {
-    if (nums.length === 0) {
-        return 0;
+    if (nums.length === 0) return 0;
+
+    const setOfNums = new Set(nums);
+    let lenthOfSubSeq = 0;
+
+    for (let num of setOfNums) {
+        // Only start counting from the beginning of a sequence
+        if (!setOfNums.has(num - 1)) {
+            let currentNum = num;
+            let streak = 1;
+
+            // Continue counting the sequence
+            while (setOfNums.has(currentNum + 1)) {
+                currentNum++;
+                streak++;
+            }
+
+            // Update the maximum length of the subsequence found
+            lenthOfSubSeq = Math.max(lenthOfSubSeq, streak);
+        }
     }
 
-    // Sort the array
-    nums.sort((a, b) => a - b);
-
-    let longestSequence = 1;
-    let counter = 1;
-    let previousNumber = nums[0];
-
-    for (let i = 1; i < nums.length; i++) {
-        // Skip duplicate numbers
-        if (nums[i] === previousNumber) {
-            continue;
-        }
-
-        // Check if the current number is consecutive to the previous one
-        if (nums[i] === previousNumber + 1) {
-            counter++;
-        } else {
-            // If it's not consecutive, update the longest sequence
-            longestSequence = Math.max(longestSequence, counter);
-            counter = 1;  // Reset counter for the new sequence
-        }
-
-        // Update the previous number to the current one
-        previousNumber = nums[i];
-    }
-
-    // After the loop, check the last sequence
-    longestSequence = Math.max(longestSequence, counter);
-
-    return longestSequence;
+    return lenthOfSubSeq;
 };
+
