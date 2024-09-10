@@ -8,7 +8,6 @@ var maxArea = function(height) {
     let leftPointer = len-1;
     let maxArea = 0;
     while(rightPointer<leftPointer){
-        console.log(rightPointer, leftPointer);
         if(height[rightPointer]<height[leftPointer]){
             maxArea = Math.max(height[rightPointer]*(leftPointer - rightPointer), maxArea);
             rightPointer++;
@@ -17,6 +16,5 @@ var maxArea = function(height) {
             leftPointer--;
         }
     }
-    console.log(maxArea);
     return maxArea
 };
