@@ -3,22 +3,23 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var sortColors = function(nums) {
-    let left = 0;
-    let numsLen = nums.length;
-    for(let i = 0; i<numsLen; i++){
-        if(nums[i]===0){
-            [nums[left], nums[i]] = [nums[i], nums[left]]
+    let left = 0;               // Boundary for 0s
+    let right = nums.length - 1; // Boundary for 2s
+    let i = 0;                  // Current pointer
+
+    while (i <= right) {
+        if (nums[i] === 0) {
+            // Swap nums[i] with nums[left]
+            [nums[i], nums[left]] = [nums[left], nums[i]];
             left++;
-        }
-        
-    };
-    
-    let right = numsLen-1;
-    for(let i= numsLen-1; i>=0;i--){
-        if(nums[i]===2){
-            [nums[right], nums[i]] = [nums[i], nums[right]]
+            i++;
+        } else if (nums[i] === 2) {
+            // Swap nums[i] with nums[right]
+            [nums[i], nums[right]] = [nums[right], nums[i]];
             right--;
+        } else {
+            // nums[i] === 1, just move forward
+            i++;
         }
-        
     }
-};
+}
